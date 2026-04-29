@@ -15,6 +15,7 @@ current_ticket = [0]        # mutable shared variable
 active_thread_count = 0
 
 def execute_ticketing_system_participation(ticket_number, part_id, shared_variable):
+    global active_thread_count
     output_file_name = "output-" + part_id + ".txt"
     # NOTE: Do not remove this print statement as it is used to grade assignment,
     # so it should be called by each thread
@@ -25,7 +26,7 @@ def execute_ticketing_system_participation(ticket_number, part_id, shared_variab
 
     while True:
         with lock:
-            if shared_variable[0] == ticket_number:
+            if shared_variable[0] >= ticket_number:
                 print(
                     "Ticket {} called at {}".format(
                         ticket_number,
@@ -65,6 +66,7 @@ class Assignment(Core):
                             datefmt="%H:%M:%S")
 
     def run(self):
+        global active_thread_count
         output_file_name = "output-" + self.part_id + ".txt"
         open(output_file_name, 'w').close()
         if self.test_username_equality(self.USERNAME):
