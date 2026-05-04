@@ -10,5 +10,9 @@ The compiled executable has the following positional arguments (meaning the orde
 
 The true|false is used to denote if there is interest in sorting the input data, either randomly generated or via input file.
 
+# Results
+
+![Output](output.png)
+
 
 
